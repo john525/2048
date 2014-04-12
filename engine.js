@@ -31,7 +31,7 @@ t = setInterval(updateGame, 1000/30);
 window.addEventListener('keydown', input, true);
 
 function input(e) {
-  if(working) return;
+  if(numWorking > 0) return;
   switch(e.keyCode) {
     case 38:
       vx = 0;
