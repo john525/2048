@@ -5,7 +5,6 @@ canvas = document.getElementById("game");
 canvas.width = LEN*SIZE + (LEN+1)*BORDER;
 canvas.height = LEN*SIZE + (LEN+1)*BORDER;
 ctx = canvas.getContext("2d");
-ctx.font = "bold 48pt Arial";
 ctx.textAlign = "center";
 ctx.textBaseline = "middle";
 
@@ -56,6 +55,10 @@ function input(e) {
   newSquare = {"offsetX":0,"offsetY":0,"val":2,"opacity":0.0};
 }
 
+function increment(sq) {
+	squares[r][c].val /= 2.0;
+}
+
 function updateGame() {
   ctx.fillStyle = "rgb(174,157,142)";
   ctx.fillRect(0,0,canvas.width,canvas.height);
@@ -87,7 +90,7 @@ function updateGame() {
           console.log(vx+","+vy);
           if(Math.abs(squares[r][c].offsetX) >= SIZE) {
             if(squares[r][c+vx] != null) {
-              squares[r][c].val *= 2;
+              increment(squares[r][c]);
             }
             squares[r][c].offsetX = 0;
             squares[r][c+vx] = squares[r][c];
@@ -102,7 +105,7 @@ function updateGame() {
           }
           else if(Math.abs(squares[r][c].offsetY) >= SIZE){
             if(squares[r+vy][c] != null) {
-              squares[r][c].val *= 2;
+              increment(squares[r][c]);
             }
             squares[r][c].offsetY = 0;
             squares[r+vy][c] = squares[r][c];
@@ -192,6 +195,7 @@ function draw(row, col, sq) {
       bg = "#000";
       fontColor = "rgb(248,234,238)";
   }
+  
   if(sq.opacity < 1.0) {
   	bg = bg.replace("rgb","rgba").replace(")",","+(sq.opacity*255)+")");
   	fontColor = fontColor.replace("rgb","rgba").replace(")",","+(sq.opacity*255)+")");
@@ -200,6 +204,11 @@ function draw(row, col, sq) {
   roundRect(col*SIZE+(col+1)*BORDER+sq.offsetX, row*SIZE+(row+1)*BORDER+sq.offsetY,
                SIZE, SIZE);
   ctx.fillStyle = fontColor;
+  fontSize = 49;//One greater than the default.
+  do {
+  	fontSize--;
+  	ctx.font = "bold " + fontSize + "pt Arial";
+  } while(ctx.measureText(""+sq.val).width > SIZE);
   ctx.fillText(""+squares[r][c].val, col*SIZE+(col+1)*BORDER+SIZE/2+sq.offsetX, row*SIZE+(row+1)*BORDER+SIZE/2+sq.offsetY);
 }
 
