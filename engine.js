@@ -11,9 +11,7 @@ ctx.textBaseline = "middle";
 
 vx = 0;
 vy = 0;
-ax = 0;
-ay = 0;
-VEL = 10;
+VEL = 30;
 
 numWorking = 0;
 
@@ -26,9 +24,9 @@ for(r=0; r<LEN; r++) {
     squares[r][c] = null;
   }
 }
-squares[3][3] = {"offsetX":0,"offsetY":0,"val":2};
+squares[3][3] = {"offsetX":0,"offsetY":0,"val":2,"opacity":0.0};
 
-t = setInterval(updateGame, 1000/30);
+t = setInterval(updateGame, 1000/60);
 
 window.addEventListener('keydown', input, true);
 
@@ -36,23 +34,23 @@ function input(e) {
   if(numWorking > 0) return;
   switch(e.keyCode) {
     case 38:
-      ax = 0;
-      ay = -1;
+      vx = 0;
+      vy = -1;
       break;
     case 40:
-      ax = 0;
-      ay = 1;
+      vx = 0;
+      vy = 1;
       break;
     case 37:
-      ay = 0;
-      ax = -1;
+      vy = 0;
+      vx = -1;
       break;
     case 39:
-      ay = 0;
-      ax = 1;
+      vy = 0;
+      vx = 1;
       break;
   }
-  newSquare = {"offsetX":0,"offsetY":0,"val":2};
+  newSquare = {"offsetX":0,"offsetY":0,"val":2,"opacity":0.0};
 }
 
 function updateGame() {
@@ -71,13 +69,14 @@ function updateGame() {
     for(c=0; c<LEN; c++) {
       if(squares[r][c] != null) {
         draw(r, c, squares[r][c]);
+        if(squares[r][c].opacity < 1.0) {
+        	squares[r][c].opacity += 0.01;
+        }
         if(r+vy<LEN && r+vy>=0 && c+vx<LEN && c+vx>=0 &&
            (squares[r+vy][c+vx] == null || squares[r+vy][c+vx].val == squares[r][c].val)) {
           if(vx!=0 || vy!=0) {
             numWorking++;
           }
-          vx+=ax;
-          vy+=ay;
           squares[r][c].offsetX += vx*VEL;
           squares[r][c].offsetY += vy*VEL;
           console.log(vx+","+vy);
@@ -118,8 +117,6 @@ function updateGame() {
   if(numWorking==0) {
     vx = 0;
     vy = 0;
-    ax = 0;
-    ay = 0;
     if(newSquare != null) {
       do {
         newR = Math.floor(Math.random() * LEN);
@@ -159,6 +156,10 @@ function draw(row, col, sq) {
     default:
       bg = "#000";
       fontColor = "rgb(248,234,238)";
+  }
+  if(sq.opacity < 1.0) {
+  	bg = bg.replace("rgb","rgba").replace(")",","+(sq.opacity*255)+")");
+  	fontColor = fontColor.replace("rgb","rgba").replace(")",","+(sq.opacity*255)+")");
   }
   ctx.fillStyle = bg;
   roundRect(col*SIZE+(col+1)*BORDER+sq.offsetX, row*SIZE+(row+1)*BORDER+sq.offsetY,
