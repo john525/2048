@@ -40,6 +40,7 @@ function input(e) {
     case 40:
       vx = 0;
       vy = 1;
+      break;
     case 37:
       vy = 0;
       vx = -1;
@@ -69,14 +70,13 @@ function updateGame() {
       if(squares[r][c] != null) {
         draw(r, c, squares[r][c]);
         if(r+vy<LEN && r+vy>=0 && c+vx<LEN && c+vx>=0 &&
-           (squares[r+vy][c+vx] == null ||
-            squares[r+vy][c+vx].val ==
-            squares[r][c].val)) {
+           (squares[r+vy][c+vx] == null || squares[r+vy][c+vx].val == squares[r][c].val)) {
           if(vx!=0 || vy!=0) {
             numWorking++;
           }
           squares[r][c].offsetX += vx*VEL;
           squares[r][c].offsetY += vy*VEL;
+          console.log(vx+","+vy);
           if(Math.abs(squares[r][c].offsetX) >= SIZE) {
             if(squares[r][c+vx] != null) {
               squares[r][c].val *= 2;
@@ -84,7 +84,13 @@ function updateGame() {
             squares[r][c].offsetX = 0;
             squares[r][c+vx] = squares[r][c];
             squares[r][c] = null;
+            
+            //Check if it will move again.
             numWorking--;
+            if(r+2*vy<LEN && r+2*vy>=0 && c+2*vx<LEN && c+2*vx>=0 &&
+           	    (squares[r+2*vy][c+2*vx] == null || squares[r+2*vy][c+2*vx].val == squares[r+vy][c+vx].val)) {
+            	numWorking++;
+            }
           }
           else if(Math.abs(squares[r][c].offsetY) >= SIZE){
             if(squares[r+vy][c] != null) {
@@ -93,7 +99,13 @@ function updateGame() {
             squares[r][c].offsetY = 0;
             squares[r+vy][c] = squares[r][c];
             squares[r][c] = null;
+            
+            //Check if it will move again.
             numWorking--;
+            if(r+2*vy<LEN && r+2*vy>=0 && c+2*vx<LEN && c+2*vx>=0 &&
+           	    (squares[r+2*vy][c+2*vx] == null || squares[r+2*vy][c+2*vx].val == squares[r+vy][c+vx].val)) {
+            	numWorking++;
+            }
           }
         }
       }
