@@ -26,7 +26,7 @@ for(r=0; r<LEN; r++) {
 }
 squares[3][3] = {"offsetX":0,"offsetY":0,"val":2,"opacity":0.0};
 
-t = setInterval(updateGame, 1000/60);
+timer = setInterval(updateGame, 1000/60);
 
 window.addEventListener('keydown', input, true);
 
@@ -68,6 +68,7 @@ function updateGame() {
   }
   
   numWorking = 0;
+  
   for(r=0; r<LEN; r++) {
     for(c=0; c<LEN; c++) {
       if(squares[r][c] != null) {
@@ -77,6 +78,7 @@ function updateGame() {
         }
         if(r+vy<LEN && r+vy>=0 && c+vx<LEN && c+vx>=0 &&
            (squares[r+vy][c+vx] == null || squares[r+vy][c+vx].val == squares[r][c].val)) {
+          
           if(vx!=0 || vy!=0) {
             numWorking++;
           }
@@ -129,7 +131,37 @@ function updateGame() {
       newSquare = null;
     }
   }
-  //working = false;
+  
+  gameContinuing = false;
+  for(r=0;r<LEN;r++) {
+  	for(c=0;c<LEN;c++) {
+  		val = squares[r][c].val;
+    	if(r+1 < LEN && squares[r+1][c].val==val) {
+    		gameContinuing = true;
+    		break;
+    	}
+    	if(r-1 >=0 && squares[r-1][c].val==val) {
+    		gameContinuing = true;
+    		break;
+    	}
+    	if(c+1 < LEN && squares[r][c+1].val==val) {
+    		gameContinuing = true;
+    		break;
+    	}
+    	if(c-1 >=0 && squares[r][c-1].val==val) {
+    		gameContinuing = true;
+    		break;
+    	}
+  	}
+  }
+  
+  if(!gameContinuing) {
+    clearInterval(timer);
+  	ctx.fillStyle = "rgba(0,0,0,0.5)";
+  	ctx.fillRect(0,0,LEN*SIZE+(LEN+1)*BORDER,LEN*SIZE+(LEN+1)*BORDER);
+  	ctx.fillStyle = "#FFF";
+  	ctx.fillText("Game Over", LEN*SIZE/2, LEN*SIZE/3);
+  }
 }
 
 function draw(row, col, sq) {
