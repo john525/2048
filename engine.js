@@ -76,6 +76,8 @@ function updateGame() {
           if(vx!=0 || vy!=0) {
             numWorking++;
           }
+          vx+=ax;
+          vy+=ay;
           squares[r][c].offsetX += vx*VEL;
           squares[r][c].offsetY += vy*VEL;
           console.log(vx+","+vy);
@@ -116,6 +118,8 @@ function updateGame() {
   if(numWorking==0) {
     vx = 0;
     vy = 0;
+    ax = 0;
+    ay = 0;
     if(newSquare != null) {
       do {
         newR = Math.floor(Math.random() * LEN);
