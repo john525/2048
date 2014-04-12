@@ -72,7 +72,9 @@ function updateGame() {
            (squares[r+vy][c+vx] == null ||
             squares[r+vy][c+vx].val ==
             squares[r][c].val)) {
-          numWorking++;
+          if(vx!=0 || vy!=0) {
+            numWorking++;
+          }
           squares[r][c].offsetX += vx*VEL;
           squares[r][c].offsetY += vy*VEL;
           if(Math.abs(squares[r][c].offsetX) >= SIZE) {
