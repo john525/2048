@@ -13,7 +13,7 @@ vx = 0;
 vy = 0;
 VEL = 10;
 
-working = false;
+numWorking = 0;
 
 newSquare = null;
 
@@ -63,7 +63,7 @@ function updateGame() {
     }
   }
   
-  working = false;
+  numWorking = 0;
   for(r=0; r<LEN; r++) {
     for(c=0; c<LEN; c++) {
       if(squares[r][c] != null) {
@@ -72,7 +72,7 @@ function updateGame() {
            (squares[r+vy][c+vx] == null ||
             squares[r+vy][c+vx].val ==
             squares[r][c].val)) {
-          working = working || true;
+          numWorking++;
           squares[r][c].offsetX += vx*VEL;
           squares[r][c].offsetY += vy*VEL;
           if(Math.abs(squares[r][c].offsetX) >= SIZE) {
@@ -82,6 +82,7 @@ function updateGame() {
             squares[r][c].offsetX = 0;
             squares[r][c+vx] = squares[r][c];
             squares[r][c] = null;
+            numWorking--;
           }
           else if(Math.abs(squares[r][c].offsetY) >= SIZE){
             if(squares[r+vy][c] != null) {
@@ -90,12 +91,13 @@ function updateGame() {
             squares[r][c].offsetY = 0;
             squares[r+vy][c] = squares[r][c];
             squares[r][c] = null;
+            numWorking--;
           }
         }
       }
     }
   }
-  if(!working) {
+  if(numWorking==0) {
     vx = 0;
     vy = 0;
     if(newSquare != null) {
@@ -107,7 +109,7 @@ function updateGame() {
       newSquare = null;
     }
   }
-  working = false;
+  //working = false;
 }
 
 function draw(row, col, sq) {
