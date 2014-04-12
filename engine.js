@@ -49,6 +49,9 @@ function input(e) {
       vy = 0;
       vx = 1;
       break;
+    default:
+  	  return;
+  	  break;
   }
   newSquare = {"offsetX":0,"offsetY":0,"val":2,"opacity":0.0};
 }
