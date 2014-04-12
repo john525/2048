@@ -11,6 +11,8 @@ ctx.textBaseline = "middle";
 
 vx = 0;
 vy = 0;
+ax = 0;
+ay = 0;
 VEL = 10;
 
 numWorking = 0;
@@ -34,20 +36,20 @@ function input(e) {
   if(numWorking > 0) return;
   switch(e.keyCode) {
     case 38:
-      vx = 0;
-      vy = -1;
+      ax = 0;
+      ay = -1;
       break;
     case 40:
-      vx = 0;
-      vy = 1;
+      ax = 0;
+      ay = 1;
       break;
     case 37:
-      vy = 0;
-      vx = -1;
+      ay = 0;
+      ax = -1;
       break;
     case 39:
-      vy = 0;
-      vx = 1;
+      ay = 0;
+      ax = 1;
       break;
   }
   newSquare = {"offsetX":0,"offsetY":0,"val":2};
