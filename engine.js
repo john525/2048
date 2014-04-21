@@ -8,26 +8,40 @@ ctx = canvas.getContext("2d");
 ctx.textAlign = "center";
 ctx.textBaseline = "middle";
 
-vx = 0;
-vy = 0;
+gameOver = false;
+
 VEL = 30;
 
-numWorking = 0;
+vx = 0;
+vy = 0;
 
-newSquare = null;
-
-squares = new Array(LEN);
-for(r=0; r<LEN; r++) {
-    squares[r] = new Array(LEN);
-    for(c=0; c<LEN; c++) {
-        squares[r][c] = null;
-    }
+function init() {
+	numWorking = 0;
+	
+	newSquare = null;
+	
+	squares = new Array(LEN);
+	for(r=0; r<LEN; r++) {
+	    squares[r] = new Array(LEN);
+	    for(c=0; c<LEN; c++) {
+	        squares[r][c] = null;
+	    }
+	}
+	squares[3][3] = makeSquare();
+	
+	timer = setInterval(updateGame, 1000/60);
 }
-squares[3][3] = makeSquare();
 
-timer = setInterval(updateGame, 1000/60);
-
+init();
 window.addEventListener('keydown', input, true);
+canvas.addEventListener('click', restart, true);
+
+function restart() {
+	if(gameOver) {
+		init();
+	}
+	gameOver = false;
+}
 
 function makeSquare() {
     return {"offsetX":0,"offsetY":0,"val":2,"opacity":0.0};
@@ -163,6 +177,7 @@ function updateGame() {
     
     if(!gameContinuing) {
         clearInterval(timer);
+        gameOver = true;
         ctx.fillStyle = "rgba(0,0,0,0.5)";
         ctx.fillRect(0,0,LEN*SIZE+(LEN+1)*BORDER,LEN*SIZE+(LEN+1)*BORDER);
         ctx.fillStyle = "#FFF";
