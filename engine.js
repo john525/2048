@@ -139,18 +139,6 @@ function updateGame() {
             }
         }
     }
-    if(numWorking==0) {
-        vx = 0;
-        vy = 0;
-        if(newSquare != null) {
-            do {
-                newR = Math.floor(Math.random() * LEN);
-                newC = Math.floor(Math.random() * LEN);
-            } while(squares[newR][newC] != null);
-            squares[newR][newC] = newSquare;
-            newSquare = null;
-        }
-    }
     
     gameContinuing = false;
     for(r=0;r<LEN;r++) {
@@ -182,6 +170,20 @@ function updateGame() {
         ctx.fillRect(0,0,LEN*SIZE+(LEN+1)*BORDER,LEN*SIZE+(LEN+1)*BORDER);
         ctx.fillStyle = "#FFF";
         ctx.fillText("Game Over", LEN*SIZE/2, LEN*SIZE/3);
+        return;
+    }
+    
+    if(numWorking==0) {
+        vx = 0;
+        vy = 0;
+        if(newSquare != null) {
+            do {
+                newR = Math.floor(Math.random() * LEN);
+                newC = Math.floor(Math.random() * LEN);
+            } while(squares[newR][newC] != null);
+            squares[newR][newC] = newSquare;
+            newSquare = null;
+        }
     }
 }
 
