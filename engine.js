@@ -116,7 +116,6 @@ function updateGame() {
                     }
                     squares[r][c].offsetX += vx*VEL;
                     squares[r][c].offsetY += vy*VEL;
-                    console.log(vx+","+vy);
                     if(Math.abs(squares[r][c].offsetX) >= SIZE) {
                         if(squares[r][c+vx] != null) {
                             increment(squares[r][c]);
@@ -204,6 +203,7 @@ function updateGame() {
         ctx.fontStyle = "bold 28pt Arial";
         w = ctx.measureText("Game Over").width;
         ctx.fillText("Game Over", LEN*SIZE/2-w/2, LEN*SIZE/3);
+        console.log(w);
         
         ctx.fontStyle = "bold 16pt Arial";
         w = ctx.measureText("Click to Restart").width;
