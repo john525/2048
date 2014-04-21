@@ -15,10 +15,10 @@ VEL = 30;
 vx = 0;
 vy = 0;
 
-squares;
-numWorking;
-newSquare;
-timer;
+numWorking = 0;
+newSquare = null;
+squares = new Array(LEN);
+timer = null;
 
 function init() {
 	numWorking = 0;
