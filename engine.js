@@ -38,13 +38,6 @@ function init() {
 }
 
 init();
-for(r=0; r<LEN; r++) {
-	    for(c=0; c<LEN; c++) {
-	        squares[r][c] = makeSquare();
-	        squares[r][c].val += Math.round(10*Math.random());
-	    }
-}
-squares[3][3] = null;
 window.addEventListener('keydown', input, true);
 canvas.addEventListener('click', restart, true);
 
