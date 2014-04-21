@@ -173,25 +173,36 @@ function updateGame() {
     
     gameContinuing = false;
     for(r=0;r<LEN;r++) {
-        for(c=0;c<LEN;c++) {
-            val = squares[r][c].val;
-            if(r+1 < LEN && squares[r+1][c].val==val) {
-                gameContinuing = true;
-                break;
-            }
-            if(r-1 >=0 && squares[r-1][c].val==val) {
-                gameContinuing = true;
-                break;
-            }
-            if(c+1 < LEN && squares[r][c+1].val==val) {
-                gameContinuing = true;
-                break;
-            }
-            if(c-1 >=0 && squares[r][c-1].val==val) {
-                gameContinuing = true;
-                break;
-            }
-        }
+    	for(c=0;c<LEN;c++) {
+    		if(squares[r][c] == null) {
+    			gameContinuing = true;
+    			break;
+    		}
+    	}
+    	if(gameContinuing) break;
+    }
+    if(!gameContinuing) {
+	    for(r=0;r<LEN;r++) {
+	        for(c=0;c<LEN;c++) {
+	            val = squares[r][c].val;
+	            if(r+1 < LEN && squares[r+1][c].val==val) {
+	                gameContinuing = true;
+	                break;
+	            }
+	            if(r-1 >=0 && squares[r-1][c].val==val) {
+	                gameContinuing = true;
+	                break;
+	            }
+	            if(c+1 < LEN && squares[r][c+1].val==val) {
+	                gameContinuing = true;
+	                break;
+	            }
+	            if(c-1 >=0 && squares[r][c-1].val==val) {
+	                gameContinuing = true;
+	                break;
+	            }
+	        }
+	    }
     }
     
     if(!gameContinuing) {
