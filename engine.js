@@ -154,21 +154,23 @@ function updateGame() {
     full = true;
     for(r=0;r<LEN;r++) {
     	for(c=0;c<LEN;c++) {
-    		full = full && (squares[r][c] == null);
+    		full = full && (squares[r][c] != null);
     	}
     }
     
-    if(numWorking==0) {
-        vx = 0;
-        vy = 0;
-        if(newSquare != null) {
-            do {
-                newR = Math.floor(Math.random() * LEN);
-                newC = Math.floor(Math.random() * LEN);
-            } while(squares[newR][newC] != null && !full);
-            squares[newR][newC] = newSquare;
-            newSquare = null;
-        }
+    if(!full) {
+	    if(numWorking==0) {
+	        vx = 0;
+	        vy = 0;
+	        if(newSquare != null) {
+	            do {
+	                newR = Math.floor(Math.random() * LEN);
+	                newC = Math.floor(Math.random() * LEN);
+	            } while(squares[newR][newC] != null);
+	            squares[newR][newC] = newSquare;
+	            newSquare = null;
+	        }
+	    }
     }
     
     gameContinuing = false;
