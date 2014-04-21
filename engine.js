@@ -202,6 +202,7 @@ function updateGame() {
         ctx.fillRect(0,0,LEN*SIZE+(LEN+1)*BORDER,LEN*SIZE+(LEN+1)*BORDER);
         ctx.fillStyle = "#FFF";
         ctx.fillText("Game Over", LEN*SIZE/2, LEN*SIZE/3);
+        ctx.fillText("Click to Restart", LEN*SIZE/2, LEN*SIZE/2);
         return;
     }
 }
