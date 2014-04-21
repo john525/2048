@@ -15,6 +15,11 @@ VEL = 30;
 vx = 0;
 vy = 0;
 
+squares;
+numWorking;
+newSquare;
+timer;
+
 function init() {
 	numWorking = 0;
 	
@@ -34,7 +39,6 @@ function init() {
 
 init();
 for(r=0; r<LEN; r++) {
-	    squares[r] = new Array(LEN);
 	    for(c=0; c<LEN; c++) {
 	        squares[r][c] = makeSquare();
 	        squares[r][c].val += Math.round(10*Math.random());
