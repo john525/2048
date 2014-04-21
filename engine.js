@@ -201,9 +201,9 @@ function updateGame() {
         ctx.fillStyle = "rgba(0,0,0,0.5)";
         ctx.fillRect(0,0,LEN*SIZE+(LEN+1)*BORDER,LEN*SIZE+(LEN+1)*BORDER);
         ctx.fillStyle = "#FFF";
-        ctx.fontStyle = "bold 36pt Arial";
+        ctx.font = "bold 36pt Arial";
         ctx.fillText("Game Over", LEN*SIZE/2, LEN*SIZE/3);
-        ctx.fillStyle = "18pt Arial";
+        ctx.font = "18pt Arial";
         ctx.fillText("Click to Restart", LEN*SIZE/2, LEN*SIZE/2);
         return;
     }
