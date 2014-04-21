@@ -22,9 +22,9 @@ timer = null;
 
 function init() {
 	numWorking = 0;
-	
+
 	newSquare = null;
-	
+
 	squares = new Array(LEN);
 	for(r=0; r<LEN; r++) {
 	    squares[r] = new Array(LEN);
@@ -33,7 +33,7 @@ function init() {
 	    }
 	}
 	squares[3][3] = makeSquare();
-	
+
 	timer = setInterval(updateGame, 1000/60);
 }
 
@@ -116,6 +116,7 @@ function updateGame() {
                     }
                     squares[r][c].offsetX += vx*VEL;
                     squares[r][c].offsetY += vy*VEL;
+                    console.log(vx+","+vy);
                     if(Math.abs(squares[r][c].offsetX) >= SIZE) {
                         if(squares[r][c+vx] != null) {
                             increment(squares[r][c]);
@@ -154,49 +155,44 @@ function updateGame() {
     full = true;
     for(r=0;r<LEN;r++) {
     	for(c=0;c<LEN;c++) {
-    		full = full && (squares[r][c] != null);
+    		full = full && (squares[r][c] == null);
     	}
     }
     
-    if(!full) {
-	    if(numWorking==0) {
-	        vx = 0;
-	        vy = 0;
-	        if(newSquare != null) {
-	            do {
-	                newR = Math.floor(Math.random() * LEN);
-	                newC = Math.floor(Math.random() * LEN);
-	                console.log("loop");
-	            } while(squares[newR][newC] != null);
-	            squares[newR][newC] = newSquare;
-	            newSquare = null;
-	        }
-	    }
+    if(numWorking==0) {
+        vx = 0;
+        vy = 0;
+        if(newSquare != null) {
+            do {
+                newR = Math.floor(Math.random() * LEN);
+                newC = Math.floor(Math.random() * LEN);
+            } while(squares[newR][newC] != null && !full);
+            squares[newR][newC] = newSquare;
+            newSquare = null;
+        }
     }
     
     gameContinuing = false;
-    if(full) {
-	    for(r=0;r<LEN;r++) {
-	        for(c=0;c<LEN;c++) {
-	            val = squares[r][c].val;
-	            if(r+1 < LEN && squares[r+1][c].val==val) {
-	                gameContinuing = true;
-	                break;
-	            }
-	            if(r-1 >=0 && squares[r-1][c].val==val) {
-	                gameContinuing = true;
-	                break;
-	            }
-	            if(c+1 < LEN && squares[r][c+1].val==val) {
-	                gameContinuing = true;
-	                break;
-	            }
-	            if(c-1 >=0 && squares[r][c-1].val==val) {
-	                gameContinuing = true;
-	                break;
-	            }
-	        }
-	    }
+    for(r=0;r<LEN;r++) {
+        for(c=0;c<LEN;c++) {
+            val = squares[r][c].val;
+            if(r+1 < LEN && squares[r+1][c].val==val) {
+                gameContinuing = true;
+                break;
+            }
+            if(r-1 >=0 && squares[r-1][c].val==val) {
+                gameContinuing = true;
+                break;
+            }
+            if(c+1 < LEN && squares[r][c+1].val==val) {
+                gameContinuing = true;
+                break;
+            }
+            if(c-1 >=0 && squares[r][c-1].val==val) {
+                gameContinuing = true;
+                break;
+            }
+        }
     }
     
     if(!gameContinuing) {
@@ -205,14 +201,7 @@ function updateGame() {
         ctx.fillStyle = "rgba(0,0,0,0.5)";
         ctx.fillRect(0,0,LEN*SIZE+(LEN+1)*BORDER,LEN*SIZE+(LEN+1)*BORDER);
         ctx.fillStyle = "#FFF";
-        ctx.fontStyle = "bold 28pt Arial";
-        w = ctx.measureText("Game Over").width;
-        ctx.fillText("Game Over", 0.5*LEN*SIZE-(0.5*w), LEN*SIZE/3);
-        console.log(w);
-        
-        ctx.fontStyle = "bold 16pt Arial";
-        w = ctx.measureText("Click to Restart").width;
-        ctx.fillText("Click to Restart", 0.5*LEN*SIZE-(0.5*w), LEN*SIZE/2);
+        ctx.fillText("Game Over", LEN*SIZE/2, LEN*SIZE/3);
         return;
     }
 }
