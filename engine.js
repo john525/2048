@@ -174,16 +174,7 @@ function updateGame() {
     }
     
     gameContinuing = false;
-    for(r=0;r<LEN;r++) {
-    	for(c=0;c<LEN;c++) {
-    		if(squares[r][c] == null) {
-    			gameContinuing = true;
-    			break;
-    		}
-    	}
-    	if(gameContinuing) break;
-    }
-    if(!gameContinuing) {
+    if(full) {
 	    for(r=0;r<LEN;r++) {
 	        for(c=0;c<LEN;c++) {
 	            val = squares[r][c].val;
