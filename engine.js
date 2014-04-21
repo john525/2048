@@ -213,12 +213,12 @@ function updateGame() {
         ctx.fillStyle = "#FFF";
         ctx.fontStyle = "bold 28pt Arial";
         w = ctx.measureText("Game Over").width;
-        ctx.fillText("Game Over", LEN*SIZE/2-w/2, LEN*SIZE/3);
+        ctx.fillText("Game Over", 0.5*LEN*SIZE-(0.5*w), LEN*SIZE/3);
         console.log(w);
         
         ctx.fontStyle = "bold 16pt Arial";
         w = ctx.measureText("Click to Restart").width;
-        ctx.fillText("Click to Restart", LEN*SIZE/2-w/2, LEN*SIZE/2);
+        ctx.fillText("Click to Restart", 0.5*LEN*SIZE-(0.5*w), LEN*SIZE/2);
         return;
     }
 }
