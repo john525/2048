@@ -166,6 +166,7 @@ function updateGame() {
 	            do {
 	                newR = Math.floor(Math.random() * LEN);
 	                newC = Math.floor(Math.random() * LEN);
+	                console.log("loop");
 	            } while(squares[newR][newC] != null);
 	            squares[newR][newC] = newSquare;
 	            newSquare = null;
