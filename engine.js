@@ -51,6 +51,45 @@ function restart() {
 	gameOver = false;
 }
 
+touchStartX = touchStartY = (LEN*SIZE+(LEN+1)*BORDER)/2;
+
+canvas.addEventListener('touchstart', touchStart, true);
+canvas.addEventListener('touchend', touchEnd, true);
+
+canvas.addEventListener('touchmove', function(e){e.preventDefault();}, true);
+
+function touchStart() {
+	touchStartX = e.changedTouches[0].pageX;
+	touchStartY = e.changedTouches[0].pageY;
+}
+
+function touchEnd() {
+	touchEndX = e.changedTouches[0].pageX;
+	touchEndY = e.changedTouches[0].pageY;
+	delta_x = touchStartX-touchEndX;
+	deltay_y = touchStartY-touchEndY;
+	if(delta_x >= delta_y) {
+		if(delta_x > 0) {
+			vx = 1;
+			vy = 0;
+		}
+		else if(delta_x < 0) {
+			vx = -1;
+			vy = 0;
+		}
+	}
+	else {
+		if(delta_y > 0) {
+			vx = 0;
+			vy = 1;
+		}
+		else if(delta_y < 0) {
+			vx = 0;
+			vy = 1;
+		}
+	}
+}
+
 function makeSquare() {
     return {"offsetX":0,"offsetY":0,"val":2,"opacity":0.0,"block":false};
 }
