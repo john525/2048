@@ -93,7 +93,7 @@ function touchEnd(e) {
 		}
 		else if(delta_y < 0) {
 			vx = 0;
-			vy = 1;
+			vy = -1;
 		}
 	}
 }
