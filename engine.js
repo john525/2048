@@ -68,11 +68,13 @@ function touchStart() {
 }
 
 function touchEnd() {
-	banner.innerHTML="touchend";
 	touchEndX = e.changedTouches[0].pageX;
 	touchEndY = e.changedTouches[0].pageY;
 	delta_x = touchStartX-touchEndX;
 	deltay_y = touchStartY-touchEndY;
+	
+	banner.innerHTML=delta_x+","+delta_y;
+	
 	if(delta_x >= delta_y) {
 		if(delta_x > 0) {
 			vx = 1;
