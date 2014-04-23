@@ -58,24 +58,19 @@ canvas.addEventListener('touchend', touchEnd, true);
 
 canvas.addEventListener('touchmove', function(e){e.preventDefault();}, true);
 
-banner = document.getElementById("banner");
-
 function touchStart(e) {
-	//alert("hi");
+	if(numWorking > 0) return;
 	touchStartX = parseInt(e.changedTouches[0].pageX);
 	touchStartY = parseInt(e.changedTouches[0].pageY);
-	banner.innerHTML = touchStartX+","+touchStartY;
-	//alert(touchStartX+","+touchStartY);
 }
 
 function touchEnd(e) {
+	if(numWorking > 0) return;
 	touchEndX = parseInt(e.changedTouches[0].pageX);
 	touchEndY = parseInt(e.changedTouches[0].pageY);
 	delta_x = touchEndX-touchStartX;
 	delta_y = touchEndY-touchStartY;
-	
-	banner.innerHTML="&Delta;"+delta_x+","+"&Delta;"+delta_y;
-	
+		
 	if(Math.abs(delta_x) >= Math.abs(delta_y)) {
 		if(delta_x > 0) {
 			vx = 1;
