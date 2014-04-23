@@ -68,7 +68,7 @@ function touchStart(e) {
 }
 
 function touchEnd(e) {
-	touchEndX = parseInt(e.changedTouches[0].pageX);
+	alert(parseInt(e.changedTouches[0].pageX));
 	touchEndY = parseInt(e.changedTouches[0].pageY);
 	delta_x = touchStartX-touchEndX;
 	deltay_y = touchStartY-touchEndY;
