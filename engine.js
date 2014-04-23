@@ -64,7 +64,8 @@ function touchStart(e) {
 	//alert("hi");
 	touchStartX = parseInt(e.changedTouches[0].pageX);
 	touchStartY = parseInt(e.changedTouches[0].pageY);
-	alert(touchStartX+","+touchStartY);
+	banner.innerHTML = touchStartX+","+touchStartY;
+	//alert(touchStartX+","+touchStartY);
 }
 
 function touchEnd(e) {
