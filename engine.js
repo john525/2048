@@ -60,14 +60,14 @@ canvas.addEventListener('touchmove', function(e){e.preventDefault();}, true);
 
 banner = document.getElementById("banner");
 
-function touchStart() {
+function touchStart(e) {
 	//alert("hi");
 	banner.innerHTML="touchstart";
 	touchStartX = e.changedTouches[0].pageX;
 	touchStartY = e.changedTouches[0].pageY;
 }
 
-function touchEnd() {
+function touchEnd(e) {
 	touchEndX = e.changedTouches[0].pageX;
 	touchEndY = e.changedTouches[0].pageY;
 	delta_x = touchStartX-touchEndX;
