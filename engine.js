@@ -96,6 +96,7 @@ function touchEnd(e) {
 			vy = -1;
 		}
 	}
+	newSquare = makeSquare();
 }
 
 function makeSquare() {
