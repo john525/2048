@@ -20,20 +20,13 @@ newSquare = null;
 squares = new Array(LEN);
 timer = null;
 
+STD_BG = "rgb(174,157,142)";
+
 function init() {
 	numWorking = 0;
 
 	newSquare = null;
 
-<<<<<<< HEAD
-//Make some blocks
-/*squares[1][1] = makeEmptySquare();
-squares[4][1] = makeEmptySquare();
-squares[1][4] = makeEmptySquare();
-squares[4][4] = makeEmptySquare();*/
-
-timer = setInterval(updateGame, 1000/60);
-=======
 	squares = new Array(LEN);
 	for(r=0; r<LEN; r++) {
 	    squares[r] = new Array(LEN);
@@ -43,7 +36,6 @@ timer = setInterval(updateGame, 1000/60);
 	}
 	squares[2][2] = {"offsetX":0,"offsetY":0,"val":-1,"opacity":1.0,"block":true};
 	squares[3][3] = makeSquare();
->>>>>>> FETCH_HEAD
 
 	timer = setInterval(updateGame, 1000/60);
 }
@@ -60,15 +52,7 @@ function restart() {
 }
 
 function makeSquare() {
-<<<<<<< HEAD
-    return {"block":false,"offsetX":0,"offsetY":0,"val":2,"opacity":0.0};
-}
-
-function makeEmptySquare() {
-	return {"block":true,"offsetX":0,"offsetY":0,"val":0,"opacity":1.0};
-=======
     return {"offsetX":0,"offsetY":0,"val":2,"opacity":0.0,"block":false};
->>>>>>> FETCH_HEAD
 }
 
 function input(e) {
@@ -102,15 +86,13 @@ function increment(sq) {
 }
 
 function updateGame() {
-    ctx.fillStyle = "rgb(174,157,142)";
+    ctx.fillStyle = STD_BG;
     ctx.fillRect(0,0,canvas.width,canvas.height);
     
     ctx.fillStyle="rgb(193,179,163)";
     for(r=0;r<LEN;r++) {
         for(c=0;c<LEN;c++) {
-            if(!squares[r][c].block) {
-            	roundRect(c*SIZE+(c+1)*BORDER, r*SIZE+(r+1)*BORDER, SIZE, SIZE, 10);
-            }
+        	roundRect(c*SIZE+(c+1)*BORDER, r*SIZE+(r+1)*BORDER, SIZE, SIZE, 10);
         }
     }
     
@@ -119,15 +101,10 @@ function updateGame() {
     for(r=0; r<LEN; r++) {
         for(c=0; c<LEN; c++) {
             if(squares[r][c] != null) {
+            	draw(r, c, squares[r][c]);
                 
                 if(squares[r][c].block) {
                 	continue;
-                }
-                
-                draw(r, c, squares[r][c]);
-                
-                if(squares[r][c].block) {
-                    continue;
                 }
                 
                 if(squares[r][c].opacity < 1.0) {
@@ -141,6 +118,7 @@ function updateGame() {
                     }
                     squares[r][c].offsetX += vx*VEL;
                     squares[r][c].offsetY += vy*VEL;
+                    console.log(vx+","+vy);
                     if(Math.abs(squares[r][c].offsetX) >= SIZE) {
                         if(squares[r][c+vx] != null) {
                             increment(squares[r][c]);
@@ -236,20 +214,12 @@ function updateGame() {
 }
 
 function draw(row, col, sq) {
-    bg = "";
-    fontColor = "";
+    bg = "";    
     switch(sq.val) {
-<<<<<<< HEAD
-    	case 0:
-    		bg = "#EEE";
-            fontColor = "rgba(0,0,0,0)";
-    		break;
-=======
     	case -1:
-    	    bg = "#FFF";
+    	    bg = STD_BG;
             fontColor = "rgba(0,0,0,0)";
             break;
->>>>>>> FETCH_HEAD
         case 2:
             bg = "rgb(234,222,208)";
             fontColor = "#3D352A";
@@ -282,18 +252,13 @@ function draw(row, col, sq) {
     roundRect(col*SIZE+(col+1)*BORDER+sq.offsetX, row*SIZE+(row+1)*BORDER+sq.offsetY,
               SIZE, SIZE);
     
-    if(!sq.block) {
-        ctx.fillStyle = fontColor;
-        fontSize = 49;//One greater than the default.
-        do {
-            fontSize--;
-            ctx.font = "bold " + fontSize + "pt Arial";
-        } while(ctx.measureText(""+sq.val).width > SIZE);
-        ctx.fillText(""+squares[r][c].val, col*SIZE+(col+1)*BORDER+SIZE/2+sq.offsetX, row*SIZE+(row+1)*BORDER+SIZE/2+sq.offsetY);
-    }
-    else {
-        
-    }
+    ctx.fillStyle = fontColor;
+    fontSize = 49;//One greater than the default.
+    do {
+        fontSize--;
+        ctx.font = "bold " + fontSize + "pt Arial";
+    } while(ctx.measureText(""+sq.val).width > SIZE);
+    ctx.fillText(""+squares[r][c].val, col*SIZE+(col+1)*BORDER+SIZE/2+sq.offsetX, row*SIZE+(row+1)*BORDER+SIZE/2+sq.offsetY);
 }
 
 function roundRect(x, y, width, height, radius) {
