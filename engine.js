@@ -63,12 +63,13 @@ banner = document.getElementById("banner");
 function touchStart(e) {
 	//alert("hi");
 	touchStartX = parseInt(e.changedTouches[0].pageX);
+	alert(touchStartX);
 	touchStartY = parseInt(e.changedTouches[0].pageY);
 	banner.innerHTML=touchstartX+","+touchStartY;
 }
 
 function touchEnd(e) {
-	alert(parseInt(e.changedTouches[0].pageX));
+	touchEndX = parseInt(e.changedTouches[0].pageX);
 	touchEndY = parseInt(e.changedTouches[0].pageY);
 	delta_x = touchStartX-touchEndX;
 	deltay_y = touchStartY-touchEndY;
