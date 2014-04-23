@@ -63,9 +63,8 @@ banner = document.getElementById("banner");
 function touchStart(e) {
 	//alert("hi");
 	touchStartX = parseInt(e.changedTouches[0].pageX);
-	alert(touchStartX);
 	touchStartY = parseInt(e.changedTouches[0].pageY);
-	banner.innerHTML=touchstartX+","+touchStartY;
+	alert(touchStartX+","+touchStartY);
 }
 
 function touchEnd(e) {
