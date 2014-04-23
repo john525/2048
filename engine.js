@@ -76,7 +76,7 @@ function touchEnd(e) {
 	
 	banner.innerHTML="&Delta;"+delta_x+","+"&Delta;"+delta_y;
 	
-	if(delta_x >= delta_y) {
+	if(Math.abs(delta_x) >= Math.abs(delta_y)) {
 		if(delta_x > 0) {
 			vx = 1;
 			vy = 0;
