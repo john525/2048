@@ -1,4 +1,4 @@
-LEN = 4;//Number of rows/cols in grid.
+LEN = 5;//Number of rows/cols in grid.
 SIZE = 120;//Size of each square in grid.
 BORDER = 10;
 canvas = document.getElementById("game");
@@ -32,6 +32,7 @@ function init() {
 	        squares[r][c] = null;
 	    }
 	}
+	squares[2][2] = {"offsetX":0,"offsetY":0,"val":-1,"opacity":1.0,"block":true};
 	squares[3][3] = makeSquare();
 
 	timer = setInterval(updateGame, 1000/60);
@@ -49,8 +50,10 @@ function restart() {
 }
 
 function makeSquare() {
-    return {"offsetX":0,"offsetY":0,"val":2,"opacity":0.0};
-}function input(e) {
+    return {"offsetX":0,"offsetY":0,"val":2,"opacity":0.0,"block":false};
+}
+
+function input(e) {
     if(numWorking > 0) return;
     switch(e.keyCode) {
         case 38:
@@ -97,6 +100,10 @@ function updateGame() {
         for(c=0; c<LEN; c++) {
             if(squares[r][c] != null) {
                 draw(r, c, squares[r][c]);
+                
+                if(squares[r][c].block) {
+                	continue;
+                }
                 
                 if(squares[r][c].opacity < 1.0) {
                     squares[r][c].opacity += 0.01;
@@ -207,6 +214,10 @@ function updateGame() {
 function draw(row, col, sq) {
     bg = "";    
     switch(sq.val) {
+    	case 0:
+    		bg = "#FFF";
+           	fontColor = "rgba(0,0,0,0)";
+    		break;
         case 2:
             bg = "rgb(234,222,208)";
             fontColor = "#3D352A";
