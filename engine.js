@@ -62,14 +62,14 @@ banner = document.getElementById("banner");
 
 function touchStart(e) {
 	//alert("hi");
-	touchStartX = parseInt(e.changedTouches[0].clientX);
-	touchStartY = parseInt(e.changedTouches[0].clientY);
+	touchStartX = parseInt(e.changedTouches[0].pageX);
+	touchStartY = parseInt(e.changedTouches[0].pageY);
 	banner.innerHTML=touchstartX+","+touchStartY;
 }
 
 function touchEnd(e) {
-	touchEndX = e.changedTouches[0].clientX;
-	touchEndY = e.changedTouches[0].clientY;
+	touchEndX = parseInt(e.changedTouches[0].pageX);
+	touchEndY = parseInt(e.changedTouches[0].pageY);
 	delta_x = touchStartX-touchEndX;
 	deltay_y = touchStartY-touchEndY;
 	
