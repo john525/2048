@@ -61,6 +61,7 @@ canvas.addEventListener('touchmove', function(e){e.preventDefault();}, true);
 banner = document.getElementById("banner");
 
 function touchStart() {
+	alert("hi");
 	banner.innerHTML="touchstart";
 	touchStartX = e.changedTouches[0].pageX;
 	touchStartY = e.changedTouches[0].pageY;
