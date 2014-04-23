@@ -214,10 +214,10 @@ function updateGame() {
 function draw(row, col, sq) {
     bg = "";    
     switch(sq.val) {
-    	case 0:
-    		bg = "#FFF";
-           	fontColor = "rgba(0,0,0,0)";
-    		break;
+    	case -1:
+    	    bg = "#FFF";
+            fontColor = "rgba(0,0,0,0)";
+            break;
         case 2:
             bg = "rgb(234,222,208)";
             fontColor = "#3D352A";
