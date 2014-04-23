@@ -1,4 +1,4 @@
-LEN = 4;//Number of rows/cols in grid.
+LEN = 5;//Number of rows/cols in grid.
 SIZE = 120;//Size of each square in grid.
 BORDER = 10;
 canvas = document.getElementById("game");
@@ -8,23 +8,24 @@ ctx = canvas.getContext("2d");
 ctx.textAlign = "center";
 ctx.textBaseline = "middle";
 
-vx = 0;
-vy = 0;
+gameOver = false;
+
 VEL = 30;
 
+vx = 0;
+vy = 0;
+
 numWorking = 0;
-
 newSquare = null;
-
 squares = new Array(LEN);
-for(r=0; r<LEN; r++) {
-    squares[r] = new Array(LEN);
-    for(c=0; c<LEN; c++) {
-        squares[r][c] = null;
-    }
-}
-squares[3][3] = makeSquare();
+timer = null;
 
+function init() {
+	numWorking = 0;
+
+	newSquare = null;
+
+<<<<<<< HEAD
 //Make some blocks
 /*squares[1][1] = makeEmptySquare();
 squares[4][1] = makeEmptySquare();
@@ -32,15 +33,42 @@ squares[1][4] = makeEmptySquare();
 squares[4][4] = makeEmptySquare();*/
 
 timer = setInterval(updateGame, 1000/60);
+=======
+	squares = new Array(LEN);
+	for(r=0; r<LEN; r++) {
+	    squares[r] = new Array(LEN);
+	    for(c=0; c<LEN; c++) {
+	        squares[r][c] = null;
+	    }
+	}
+	squares[2][2] = {"offsetX":0,"offsetY":0,"val":-1,"opacity":1.0,"block":true};
+	squares[3][3] = makeSquare();
+>>>>>>> FETCH_HEAD
 
+	timer = setInterval(updateGame, 1000/60);
+}
+
+init();
 window.addEventListener('keydown', input, true);
+canvas.addEventListener('click', restart, true);
+
+function restart() {
+	if(gameOver) {
+		init();
+	}
+	gameOver = false;
+}
 
 function makeSquare() {
+<<<<<<< HEAD
     return {"block":false,"offsetX":0,"offsetY":0,"val":2,"opacity":0.0};
 }
 
 function makeEmptySquare() {
 	return {"block":true,"offsetX":0,"offsetY":0,"val":0,"opacity":1.0};
+=======
+    return {"offsetX":0,"offsetY":0,"val":2,"opacity":0.0,"block":false};
+>>>>>>> FETCH_HEAD
 }
 
 function input(e) {
@@ -80,7 +108,9 @@ function updateGame() {
     ctx.fillStyle="rgb(193,179,163)";
     for(r=0;r<LEN;r++) {
         for(c=0;c<LEN;c++) {
-            roundRect(c*SIZE+(c+1)*BORDER, r*SIZE+(r+1)*BORDER, SIZE, SIZE, 10);
+            if(!squares[r][c].block) {
+            	roundRect(c*SIZE+(c+1)*BORDER, r*SIZE+(r+1)*BORDER, SIZE, SIZE, 10);
+            }
         }
     }
     
@@ -89,6 +119,11 @@ function updateGame() {
     for(r=0; r<LEN; r++) {
         for(c=0; c<LEN; c++) {
             if(squares[r][c] != null) {
+                
+                if(squares[r][c].block) {
+                	continue;
+                }
+                
                 draw(r, c, squares[r][c]);
                 
                 if(squares[r][c].block) {
@@ -140,6 +175,14 @@ function updateGame() {
             }
         }
     }
+    
+    full = true;
+    for(r=0;r<LEN;r++) {
+    	for(c=0;c<LEN;c++) {
+    		full = full && (squares[r][c] == null);
+    	}
+    }
+    
     if(numWorking==0) {
         vx = 0;
         vy = 0;
@@ -147,7 +190,7 @@ function updateGame() {
             do {
                 newR = Math.floor(Math.random() * LEN);
                 newC = Math.floor(Math.random() * LEN);
-            } while(squares[newR][newC] != null);
+            } while(squares[newR][newC] != null && !full);
             squares[newR][newC] = newSquare;
             newSquare = null;
         }
@@ -178,10 +221,17 @@ function updateGame() {
     
     if(!gameContinuing) {
         clearInterval(timer);
+        gameOver = true;
         ctx.fillStyle = "rgba(0,0,0,0.5)";
         ctx.fillRect(0,0,LEN*SIZE+(LEN+1)*BORDER,LEN*SIZE+(LEN+1)*BORDER);
         ctx.fillStyle = "#FFF";
-        ctx.fillText("Game Over", LEN*SIZE/2, LEN*SIZE/3);
+        
+        ctx.font = "bold 36pt Arial";
+        ctx.fillText("Game Over", (LEN*SIZE + (LEN+1)*BORDER)/2, LEN*SIZE/3);
+        
+        ctx.font = "18pt Arial";
+        ctx.fillText("Click to Restart", (LEN*SIZE + (LEN+1)*BORDER)/2, LEN*SIZE/2);
+        return;
     }
 }
 
@@ -189,10 +239,17 @@ function draw(row, col, sq) {
     bg = "";
     fontColor = "";
     switch(sq.val) {
+<<<<<<< HEAD
     	case 0:
     		bg = "#EEE";
             fontColor = "rgba(0,0,0,0)";
     		break;
+=======
+    	case -1:
+    	    bg = "#FFF";
+            fontColor = "rgba(0,0,0,0)";
+            break;
+>>>>>>> FETCH_HEAD
         case 2:
             bg = "rgb(234,222,208)";
             fontColor = "#3D352A";
