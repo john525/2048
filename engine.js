@@ -25,13 +25,25 @@ for(r=0; r<LEN; r++) {
 }
 squares[3][3] = makeSquare();
 
+//Make some blocks
+/*squares[1][1] = makeEmptySquare();
+squares[4][1] = makeEmptySquare();
+squares[1][4] = makeEmptySquare();
+squares[4][4] = makeEmptySquare();*/
+
 timer = setInterval(updateGame, 1000/60);
 
 window.addEventListener('keydown', input, true);
 
 function makeSquare() {
-    return {"offsetX":0,"offsetY":0,"val":2,"opacity":0.0};
-}function input(e) {
+    return {"block":false,"offsetX":0,"offsetY":0,"val":2,"opacity":0.0};
+}
+
+function makeEmptySquare() {
+	return {"block":true,"offsetX":0,"offsetY":0,"val":0,"opacity":1.0};
+}
+
+function input(e) {
     if(numWorking > 0) return;
     switch(e.keyCode) {
         case 38:
@@ -79,6 +91,10 @@ function updateGame() {
             if(squares[r][c] != null) {
                 draw(r, c, squares[r][c]);
                 
+                if(squares[r][c].block) {
+                    continue;
+                }
+                
                 if(squares[r][c].opacity < 1.0) {
                     squares[r][c].opacity += 0.01;
                 }
@@ -90,7 +106,6 @@ function updateGame() {
                     }
                     squares[r][c].offsetX += vx*VEL;
                     squares[r][c].offsetY += vy*VEL;
-                    console.log(vx+","+vy);
                     if(Math.abs(squares[r][c].offsetX) >= SIZE) {
                         if(squares[r][c+vx] != null) {
                             increment(squares[r][c]);
@@ -171,8 +186,13 @@ function updateGame() {
 }
 
 function draw(row, col, sq) {
-    bg = "";    
+    bg = "";
+    fontColor = "";
     switch(sq.val) {
+    	case 0:
+    		bg = "#EEE";
+            fontColor = "rgba(0,0,0,0)";
+    		break;
         case 2:
             bg = "rgb(234,222,208)";
             fontColor = "#3D352A";
@@ -205,13 +225,18 @@ function draw(row, col, sq) {
     roundRect(col*SIZE+(col+1)*BORDER+sq.offsetX, row*SIZE+(row+1)*BORDER+sq.offsetY,
               SIZE, SIZE);
     
-    ctx.fillStyle = fontColor;
-    fontSize = 49;//One greater than the default.
-    do {
-        fontSize--;
-        ctx.font = "bold " + fontSize + "pt Arial";
-    } while(ctx.measureText(""+sq.val).width > SIZE);
-    ctx.fillText(""+squares[r][c].val, col*SIZE+(col+1)*BORDER+SIZE/2+sq.offsetX, row*SIZE+(row+1)*BORDER+SIZE/2+sq.offsetY);
+    if(!sq.block) {
+        ctx.fillStyle = fontColor;
+        fontSize = 49;//One greater than the default.
+        do {
+            fontSize--;
+            ctx.font = "bold " + fontSize + "pt Arial";
+        } while(ctx.measureText(""+sq.val).width > SIZE);
+        ctx.fillText(""+squares[r][c].val, col*SIZE+(col+1)*BORDER+SIZE/2+sq.offsetX, row*SIZE+(row+1)*BORDER+SIZE/2+sq.offsetY);
+    }
+    else {
+        
+    }
 }
 
 function roundRect(x, y, width, height, radius) {
