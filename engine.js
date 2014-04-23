@@ -90,7 +90,9 @@ function updateGame() {
     ctx.fillStyle="rgb(193,179,163)";
     for(r=0;r<LEN;r++) {
         for(c=0;c<LEN;c++) {
-            roundRect(c*SIZE+(c+1)*BORDER, r*SIZE+(r+1)*BORDER, SIZE, SIZE, 10);
+            if(squares[r][c].block==false) {
+            	roundRect(c*SIZE+(c+1)*BORDER, r*SIZE+(r+1)*BORDER, SIZE, SIZE, 10);
+            }
         }
     }
     
@@ -99,11 +101,12 @@ function updateGame() {
     for(r=0; r<LEN; r++) {
         for(c=0; c<LEN; c++) {
             if(squares[r][c] != null) {
-                draw(r, c, squares[r][c]);
                 
                 if(squares[r][c].block) {
                 	continue;
                 }
+                
+                draw(r, c, squares[r][c]);
                 
                 if(squares[r][c].opacity < 1.0) {
                     squares[r][c].opacity += 0.01;
