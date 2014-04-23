@@ -90,7 +90,7 @@ function updateGame() {
     ctx.fillStyle="rgb(193,179,163)";
     for(r=0;r<LEN;r++) {
         for(c=0;c<LEN;c++) {
-            if(squares[r][c].block==false) {
+            if(!squares[r][c].block) {
             	roundRect(c*SIZE+(c+1)*BORDER, r*SIZE+(r+1)*BORDER, SIZE, SIZE, 10);
             }
         }
