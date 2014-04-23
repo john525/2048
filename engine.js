@@ -51,20 +51,20 @@ function restart() {
 	gameOver = false;
 }
 
-touchStartX = touchStartY = (LEN*SIZE+(LEN+1)*BORDER)/2;
+touchStartX = touchStartY = 0;
 
 canvas.addEventListener('touchstart', touchStart, true);
 canvas.addEventListener('touchend', touchEnd, true);
 
 canvas.addEventListener('touchmove', function(e){e.preventDefault();}, true);
 
-//banner = document.getElementById("banner");
+banner = document.getElementById("banner");
 
 function touchStart(e) {
 	//alert("hi");
 	touchStartX = parseInt(e.changedTouches[0].pageX);
 	touchStartY = parseInt(e.changedTouches[0].pageY);
-	//banner.innerHTML = touchStartX+","+touchStartY;
+	banner.innerHTML = touchStartX+","+touchStartY;
 	//alert(touchStartX+","+touchStartY);
 }
 
@@ -74,7 +74,7 @@ function touchEnd(e) {
 	delta_x = touchEndX-touchStartX;
 	delta_y = touchEndY-touchStartY;
 	
-	//banner.innerHTML="&Delta;"+delta_x+","+"&Delta;"+delta_y;
+	banner.innerHTML="&Delta;"+delta_x+","+"&Delta;"+delta_y;
 	
 	if(delta_x >= delta_y) {
 		if(delta_x > 0) {
