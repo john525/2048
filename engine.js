@@ -59,14 +59,14 @@ canvas.addEventListener('touchend', touchEnd, true);
 //window.addEventListener('touchmove', function(e){e.preventDefault();}, true);
 
 function touchStart(e) {
-	e.preventDefault();
+	//e.preventDefault();
 	if(numWorking > 0) return;
 	touchStartX = parseInt(e.changedTouches[0].pageX);
 	touchStartY = parseInt(e.changedTouches[0].pageY);
 }
 
 function touchEnd(e) {
-	e.preventDefault();
+	//e.preventDefault();
 	if(numWorking > 0) return;
 	touchEndX = parseInt(e.changedTouches[0].pageX);
 	touchEndY = parseInt(e.changedTouches[0].pageY);
