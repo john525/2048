@@ -56,7 +56,7 @@ touchStartX = touchStartY = 0;
 canvas.addEventListener('touchstart', touchStart, true);
 canvas.addEventListener('touchend', touchEnd, true);
 
-//window.addEventListener('touchmove', function(e){e.preventDefault();}, true);
+window.addEventListener('touchmove', function(e){e.preventDefault();}, true);
 
 function touchStart(e) {
 	//e.preventDefault();
