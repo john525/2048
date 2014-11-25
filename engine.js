@@ -1,4 +1,4 @@
-ROOM_NUMBER = 310;
+ROOM_NUMBER = 206;
 
 LEN = 4;//Number of rows/cols in grid.
 SIZE = 120;//Size of each square in grid.
