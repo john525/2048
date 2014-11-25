@@ -99,7 +99,7 @@ function touchEnd(e) {
 }
 
 function makeSquare() {
-    return {"offsetX":0,"offsetY":0,"val":128,"opacity":0.0,"block":false};
+    return {"offsetX":0,"offsetY":0,"val":2,"opacity":0.0,"block":false};
 }
 
 function input(e) {
@@ -275,10 +275,6 @@ function draw(row, col, sq) {
             bg = "rgb(234,222,208)";
             fontColor = "#3D352A";
             break;
-        case ROOM_NUMBER:
-        	bg = "rgb(234,222,208)";
-            fontColor = "#3D352A";
-            break;
         case 4:
             bg = "rgb(233,218,186)";
             fontColor = "#3D352A";
@@ -294,6 +290,22 @@ function draw(row, col, sq) {
         case 32:
             bg = "#000";
             fontColor = "rgb(248,234,238)";
+            break;
+        case 64:
+            bg = "rgb(234,222,208)";
+            fontColor = "#3D352A";
+            break;
+        case 128:
+            bg = "rgb(233,218,186)";
+            fontColor = "#3D352A";
+            break;
+        case 256:
+            bg = "rgb(241,162,96)";
+            fontColor = "rgb(248,234,238)";
+            break;
+        case ROOM_NUMBER:
+            bg = "rgb(234,222,208)";
+            fontColor = "#3D352A";
             break;
         default:
             bg = "#000";
