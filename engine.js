@@ -97,7 +97,7 @@ function touchEnd(e) {
 }
 
 function makeSquare() {
-    return {"offsetX":0,"offsetY":0,"val":8,"opacity":0.0,"block":false};
+    return {"offsetX":0,"offsetY":0,"val":128,"opacity":0.0,"block":false};
 }
 
 function input(e) {
