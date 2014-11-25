@@ -322,7 +322,7 @@ function draw(row, col, sq) {
     ctx.fillStyle = fontColor;
     fontSize = 49;//One greater than the default.
     str = sq.val;
-    if(str == ROOM_NUMBER) str = ROOM_NUMBER+"!!!";
+    if(str == ROOM_NUMBER) str = ROOM_NUMBER+"";
     do {
         fontSize--;
         ctx.font = "bold " + fontSize + "pt Arial";
