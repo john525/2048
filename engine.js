@@ -1,6 +1,6 @@
 ROOM_NUMBER = 310;
 
-LEN = 5;//Number of rows/cols in grid.
+LEN = 4;//Number of rows/cols in grid.
 SIZE = 120;//Size of each square in grid.
 BORDER = 10;
 canvas = document.getElementById("game");
@@ -36,7 +36,7 @@ function init() {
 	        squares[r][c] = null;
 	    }
 	}
-	squares[2][2] = {"offsetX":0,"offsetY":0,"val":-1,"opacity":1.0,"block":true};
+//	squares[2][2] = {"offsetX":0,"offsetY":0,"val":-1,"opacity":1.0,"block":true};
 	squares[3][3] = makeSquare();
 
 	timer = setInterval(updateGame, 1000/60);
