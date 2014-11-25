@@ -127,7 +127,11 @@ function input(e) {
 }
 
 function increment(sq) {
-	//squares[r][c].val *= 2.0;
+	if(squares[r][c]*2 > 312) {
+		squares[r][c] = 312;
+	} else {
+		squares[r][c].val *= 2.0;
+	}
 }
 
 function updateGame() {
