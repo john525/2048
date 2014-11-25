@@ -97,7 +97,7 @@ function touchEnd(e) {
 }
 
 function makeSquare() {
-    return {"offsetX":0,"offsetY":0,"val":312,"opacity":0.0,"block":false};
+    return {"offsetX":0,"offsetY":0,"val":2,"opacity":0.0,"block":false};
 }
 
 function input(e) {
@@ -307,11 +307,13 @@ function draw(row, col, sq) {
     
     ctx.fillStyle = fontColor;
     fontSize = 49;//One greater than the default.
+    str = sq.val;
+    if(str == 312) str = "312!!!";
     do {
         fontSize--;
         ctx.font = "bold " + fontSize + "pt Arial";
-    } while(ctx.measureText(""+sq.val).width > SIZE);
-    ctx.fillText(""+squares[r][c].val, col*SIZE+(col+1)*BORDER+SIZE/2+sq.offsetX, row*SIZE+(row+1)*BORDER+SIZE/2+sq.offsetY);
+    } while(ctx.measureText(""+str).width > SIZE);
+    ctx.fillText(""+str, col*SIZE+(col+1)*BORDER+SIZE/2+sq.offsetX, row*SIZE+(row+1)*BORDER+SIZE/2+sq.offsetY);
 }
 
 function roundRect(x, y, width, height, radius) {
