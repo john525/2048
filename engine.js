@@ -127,7 +127,7 @@ function input(e) {
 }
 
 function increment(sq) {
-	squares[r][c].val *= 2.0;
+	//squares[r][c].val *= 2.0;
 }
 
 function updateGame() {
@@ -267,6 +267,10 @@ function draw(row, col, sq) {
             break;
         case 2:
             bg = "rgb(234,222,208)";
+            fontColor = "#3D352A";
+            break;
+        case 312:
+        	bg = "rgb(234,222,208)";
             fontColor = "#3D352A";
             break;
         case 4:
