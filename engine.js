@@ -127,8 +127,8 @@ function input(e) {
 }
 
 function increment(sq) {
-	if(squares[r][c]*2 > 312) {
-		squares[r][c] = 312;
+	if(squares[r][c].val*2 > 312) {
+		squares[r][c].val = 312;
 	} else {
 		squares[r][c].val *= 2.0;
 	}
