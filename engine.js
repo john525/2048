@@ -1,3 +1,5 @@
+ROOM_NUMBER = 310;
+
 LEN = 5;//Number of rows/cols in grid.
 SIZE = 120;//Size of each square in grid.
 BORDER = 10;
@@ -127,8 +129,8 @@ function input(e) {
 }
 
 function increment(sq) {
-	if(squares[r][c].val*2 > 312) {
-		squares[r][c].val = 312;
+	if(squares[r][c].val*2 > ROOM_NUMBER) {
+		squares[r][c].val = ROOM_NUMBER;
 	} else {
 		squares[r][c].val *= 2.0;
 	}
@@ -273,7 +275,7 @@ function draw(row, col, sq) {
             bg = "rgb(234,222,208)";
             fontColor = "#3D352A";
             break;
-        case 312:
+        case ROOM_NUMBER:
         	bg = "rgb(234,222,208)";
             fontColor = "#3D352A";
             break;
@@ -308,7 +310,7 @@ function draw(row, col, sq) {
     ctx.fillStyle = fontColor;
     fontSize = 49;//One greater than the default.
     str = sq.val;
-    if(str == 312) str = "312!!!";
+    if(str == ROOM_NUMBER) str = ROOM_NUMBER+"!!!";
     do {
         fontSize--;
         ctx.font = "bold " + fontSize + "pt Arial";
