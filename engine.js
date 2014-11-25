@@ -288,7 +288,7 @@ function draw(row, col, sq) {
             fontColor = "rgb(248,234,238)";
             break;
         case 32:
-            bg = "#000";
+            bg = "#rgb(247,102,72)";
             fontColor = "rgb(248,234,238)";
             break;
         case 64:
