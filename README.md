@@ -1,4 +1,4 @@
 2048
 ====
 
-My take on 2048.
+My version of 2048.
